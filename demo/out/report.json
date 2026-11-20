@@ -1,0 +1,237 @@
+{
+  "catalog": {
+    "T-101@0": {
+      "product_id": "P000000-T-101-A0",
+      "identity": [
+        "T-101",
+        null
+      ],
+      "relation_src": "initial",
+      "masses": {
+        "tractor": [
+          7050,
+          7150
+        ]
+      }
+    },
+    "T-101@1": {
+      "product_id": "P000001-T-101-A1",
+      "identity": [
+        "T-101",
+        "R-A"
+      ],
+      "relation_src": "attach",
+      "masses": {
+        "tractor": [
+          7050,
+          7150
+        ],
+        "trailer": [
+          1550,
+          1650
+        ]
+      }
+    },
+    "T-101@2": {
+      "product_id": "P000002-T-101-A1",
+      "identity": [
+        "T-101",
+        null
+      ],
+      "relation_src": "detach",
+      "masses": {
+        "tractor": [
+          7050,
+          7150
+        ]
+      }
+    },
+    "T-101@3": {
+      "product_id": "P000003-T-101-A3",
+      "identity": [
+        "T-101",
+        "R-B"
+      ],
+      "relation_src": "attach",
+      "masses": {
+        "tractor": [
+          7050,
+          7150
+        ],
+        "trailer": [
+          2100,
+          2250
+        ]
+      }
+    },
+    "T-101@4": {
+      "product_id": "P000003-T-101-A3",
+      "identity": [
+        "T-101",
+        "R-B"
+      ],
+      "relation_src": "attach",
+      "masses": {
+        "tractor": [
+          7050,
+          7150
+        ],
+        "trailer": [
+          2100,
+          2250
+        ]
+      }
+    }
+  },
+  "trips": {
+    "exact_cancellation": {
+      "trip_id": "TRIP0001",
+      "net": [
+        3800,
+        3800
+      ],
+      "flow": [
+        3800,
+        3800
+      ],
+      "cancellation": "exact cancellation",
+      "note": "same composition ('T-101', 'R-A'): tare is one unknown and cancels; net = |gross_out - gross_in| = 3800 kg exactly"
+    },
+    "swap_trailer": {
+      "trip_id": "TRIP0002",
+      "net": [
+        2700,
+        2950
+      ],
+      "flow": [
+        2700,
+        2950
+      ],
+      "cancellation": "partial cancellation",
+      "contributions": [
+        {
+          "entity": "T-101",
+          "role": "cancelled",
+          "coef": 0,
+          "range": [
+            7050,
+            7150
+          ]
+        },
+        {
+          "entity": "R-A",
+          "role": "uncertain",
+          "coef": 1,
+          "range": [
+            1550,
+            1650
+          ]
+        },
+        {
+          "entity": "R-B",
+          "role": "uncertain",
+          "coef": -1,
+          "range": [
+            2100,
+            2250
+          ]
+        }
+      ],
+      "ticket_in_goods": [
+        300,
+        500
+      ],
+      "ticket_out_goods": [
+        3100,
+        3350
+      ]
+    },
+    "ticket_competition": {
+      "trip_id": "TRIP0003",
+      "status": "DRAFT",
+      "confirm": "rejected: ticket IN-002 already used by confirmed trip TRIP0002",
+      "ticket_usage": {
+        "ticket_id": "IN-002",
+        "confirmed_trip": "TRIP0002",
+        "trips": [
+          {
+            "trip_id": "TRIP0002",
+            "status": "CONFIRMED",
+            "role": "IN"
+          },
+          {
+            "trip_id": "TRIP0003",
+            "status": "DRAFT",
+            "role": "IN"
+          }
+        ]
+      }
+    },
+    "direction_impossible": {
+      "trip_id": "TRIP0004",
+      "reason": "DIRECTION_IMPOSSIBLE",
+      "confirm": "rejected: trip TRIP0004 is not physically feasible (DIRECTION_IMPOSSIBLE)"
+    },
+    "empty_tractor_cancellation": {
+      "trip_id": "TRIP0005",
+      "reason": "OK",
+      "net": [
+        300,
+        300
+      ]
+    },
+    "late_correction_reopen": {
+      "new_trip_id": "TRIP0006",
+      "predecessor_trip": "TRIP0002",
+      "status": "REVIEW",
+      "net": [
+        2650,
+        2900
+      ],
+      "in_product": "P000005-T-101-A1",
+      "out_product": "P000003-T-101-A3",
+      "original_trip_status": "CONFIRMED",
+      "original_net": [
+        2700,
+        2950
+      ],
+      "ticket_owner_still": "TRIP0002"
+    },
+    "external_snapshot": {
+      "trip_id": "TRIP0001",
+      "product": "P000003-T-101-A3",
+      "net": [
+        200,
+        200
+      ],
+      "reconcile": []
+    }
+  },
+  "checks": {
+    "warehouse_reconcile": [],
+    "catalog_verify": [],
+    "foreign_bindings": [
+      {
+        "binding_id": 1,
+        "attach_seq": 1,
+        "detach_seq": 2,
+        "tractor": "T-101",
+        "trailer": "R-A"
+      },
+      {
+        "binding_id": 2,
+        "attach_seq": 3,
+        "detach_seq": null,
+        "tractor": "T-101",
+        "trailer": "R-B"
+      },
+      {
+        "binding_id": 3,
+        "attach_seq": 4,
+        "detach_seq": null,
+        "tractor": "T-202",
+        "trailer": "R-A"
+      }
+    ]
+  }
+}
